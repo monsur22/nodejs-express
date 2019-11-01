@@ -1,0 +1,39 @@
+
+<%- include ../layouts/header %>
+
+<table class="table">
+    <thead>
+      <tr>
+   
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Message</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% pages.forEach(function (page) { %>
+      <tr>
+
+        <td><%= page.title %></td>
+        <td><%= page.email %></td>
+        <td><%= page.message %></td>
+        <td>
+            <a class="btn btn-info btn-lg" href="edit/<%= page._id %>">
+            Edit
+            </a>  
+            <a class="btn btn-info btn-lg" href="delete/<%= page._id %>">
+           Delete
+            </a>
+        </td>
+       
+      </tr>
+
+
+    <% });%>
+        
+
+    </tbody>
+  </table>
+
+<%- include ../layouts/footer %>

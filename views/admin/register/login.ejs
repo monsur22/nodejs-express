@@ -1,0 +1,35 @@
+<%- include ../../layouts/header %>
+<!-- Default form login -->
+<form class="text-center border border-light p-5" method="POST" action="/register/login">
+
+    <p class="h4 mb-4">Sign in</p>
+
+    <!-- Email -->
+    <input type="email" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+    <!-- Password -->
+    <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+
+    <div class="d-flex justify-content-around">
+        <div>
+        
+        </div>
+    
+    
+    </div>
+
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+    <!-- Register -->
+    <a href="/register/forget-password">Forgot password?</a>
+
+    <p>Not a member?
+        <a href="/register/singup">Register</a>
+    </p>
+
+
+
+</form>
+<!-- Default form login -->
+<%- include ../../layouts/footer %>

@@ -1,0 +1,39 @@
+
+<%- include ../../layouts/header %>
+
+<table class="table">
+    <thead>
+      <tr>
+   
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+    
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% categorys.forEach(function (category) { %>
+      <tr>
+
+        <td><%= category.title %></td>
+        <td><%= category.desc %></td>
+ 
+        <td>
+            <a class="btn btn-info btn-lg" href="/admin/category/edit/<%= category._id %>">
+            Edit
+            </a>  
+            <a class="btn btn-info btn-lg" href="/admin/category/delete/<%= category._id %>">
+           Delete
+            </a>
+        </td>
+       
+      </tr>
+
+
+    <% });%>
+        
+
+    </tbody>
+  </table>
+
+<%- include ../../layouts/footer %>

@@ -1,0 +1,30 @@
+
+<%- include ../../layouts/header %>
+
+<!-- Default form contact -->
+<form class="text-center border border-light p-5" method="POST" action="/admin/category/update/<%= id %>">
+
+  <p class="h4 mb-4">Edit Data</p>
+
+  <!-- Name -->
+  <input type="text" name="title"id="defaultContactFormName" class="form-control mb-4" placeholder="Name"value="<%= title %>">
+
+  <!-- Email -->
+  <input type="text" name="desc"id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail"value="<%= desc %>">
+
+
+
+
+  <!-- Copy
+  <div class="custom-control custom-checkbox mb-4">
+      <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
+     
+  </div> -->
+<input type="hidden"name="id"value="<%= id %>">
+  <!-- Send button -->
+  <button class="btn btn-info btn-block" type="submit">Send</button>
+
+</form>
+<!-- Default form contact -->
+
+<%- include ../../layouts/footer %>

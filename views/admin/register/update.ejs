@@ -1,0 +1,31 @@
+<%- include ../../layouts/header %>
+<!-- Default form login -->
+<form class="text-center border border-light p-5" method="POST" action="/register/reset-password/<%= email %>">
+
+    <p class="h4 mb-4">Update Password</p>
+
+    <!-- Email -->
+    <input type="password" name="password" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Password">
+    <!-- <input type="password" class="form-control" name="password" placeholder="New Password" id="showPass" > -->
+    <input type="hidden" class="form-control" name="email" value="<%= email %>">
+    <input type="hidden" class="form-control" name="token" value="<%=  token %>">
+ 
+
+    <div class="d-flex justify-content-around">
+        <div>
+        
+        </div>
+    
+    
+    </div>
+
+    <!-- Sign in button -->
+    <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+
+
+
+
+
+</form>
+<!-- Default form login -->
+<%- include ../../layouts/footer %>

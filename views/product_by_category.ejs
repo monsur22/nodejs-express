@@ -1,0 +1,53 @@
+
+<%- include layouts/header %>
+<style>
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          max-width: 300px;
+          margin: auto;
+          text-align: center;
+          font-family: arial;
+          margin-top: 20px;
+        }
+        
+        .price {
+          color: grey;
+          font-size: 22px;
+        }
+        
+        .card button {
+          border: none;
+          outline: 0;
+          padding: 12px;
+          color: white;
+          background-color: #000;
+          text-align: center;
+          cursor: pointer;
+          width: 100%;
+          font-size: 18px;
+        }
+        
+        .card button:hover {
+          opacity: 0.7;
+        }
+        </style>
+        <div class="row">
+           
+            <%product.forEach(function (p) {%>
+                <div class="card">
+                  <a href="/product-details-by-id/<%= p._id %>">
+                        <img src="<%= p.image%>"height="300px" alt="Denim Jeans" style="width:100%">
+                  </a>
+                        <h1><%= p.title%></h1>
+                        <p class="price">Price:&nbsp;$<%= p.price%></p>
+                        <p><%= p.desc%></p>
+                        <p><button>Add to Cart</button></p>
+                </div>
+           
+            <%});%>    
+            
+                
+
+</div>
+<%- include layouts/footer %>
+

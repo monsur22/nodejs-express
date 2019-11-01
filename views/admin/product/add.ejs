@@ -1,0 +1,40 @@
+
+<%- include ../../layouts/header %>
+
+<!-- Default form contact -->
+<form class="text-center border border-light p-5" method="POST" action="/admin/product/add" enctype="multipart/form-data">
+
+  <p class="h4 mb-4">Add Product</p>
+
+  <!-- Name -->
+  <input type="text" name="title"id="defaultContactFormName" class="form-control mb-4" placeholder="Title"value="<%= title %>">
+
+
+  <select name="category" class="form-control">
+    <option value="">Select Category</option>
+    <% categories.forEach(function(cat) { %>
+  <option value="<%= cat.title %>"><%= cat.title %></option>
+  
+  <% });%>
+</select>
+
+
+    <br>
+  <input type="text" name="price"id="defaultContactFormEmail" class="form-control mb-4" placeholder="Price"value="<%= price %>">
+  <input type="file" name="image"id="defaultContactFormEmail" class="form-control mb-4" >
+
+
+
+  <div class="form-group">
+    <textarea name="desc"class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Drescription"><%= desc %></textarea>
+</div>
+
+
+
+
+
+  <button class="btn btn-info btn-block" type="submit">Send</button>
+
+</form>
+
+<%- include ../../layouts/footer %>
