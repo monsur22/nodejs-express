@@ -2,6 +2,7 @@ var express = require('express');
 var router=express.Router();
 const fileUpload = require('express-fileupload');
 const app = express();
+var session = require('express-session');
 
 app.use(fileUpload());
 const { check, validationResult } = require('express-validator');
@@ -15,7 +16,21 @@ const fs = require('fs-extra');
 // router.get('/', function (req, res) {
 //     res.send(' home page')
 //   })
-router.get('/', (req, res) => res.render('index'));
+// router.get('/', (req, res) => res.render('index'));
+// router.get('/admin', (req, res) => res.send('Admin Page'));
+
+router.get('/', function (req, res) {
+ 
+  var session=req.session;
+  email=session.email
+  console.log(session);
+
+  res.render('index',{email:email});
+
+ 
+
+
+});
 
 //******************home all product ***************
 router.get('/all-product', function (req, res) {
@@ -23,6 +38,7 @@ router.get('/all-product', function (req, res) {
         res.render('all_product',{
           product:product
         }) 
+        console.log(req.session);
   
     })
   
@@ -55,15 +71,9 @@ router.get('/product-details-by-id/:_id', function (req, res) {
         res.render('product_details_by_id',{
           product:product
 
-        //  title: product.title, //1st title variable || page.title from database variable
-        //  desc: product.desc,
-        //  price: product.price,
 
-        // category: product.category,
-        //  image: product.image,
-        //  id: product._id
        }) 
-       // res.send(' Save Data')
+
      
       });
   

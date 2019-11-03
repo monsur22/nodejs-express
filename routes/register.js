@@ -6,6 +6,9 @@ var nodemailer = require('nodemailer');
 var mkdirp = require('mkdirp');
 const fs = require('fs-extra');
 var bcrypt = require('bcryptjs');
+var session = require('express-session')
+
+
 // default options
 app.use(fileUpload());
 const { check, validationResult } = require('express-validator');
@@ -199,53 +202,6 @@ router.post('/singup', [
       /////user end
 
 
-  //     var emailvefiry= new Emailvefiry({
-  //       fname: fname,
-  //       lname: lname,
-  //       email: email,
-  //       password: password,
-  //       token:token,
-  //       status: 0
-  
-  //     });
-  
-  // var transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //     user: 'tmwebdevtest@gmail.com',
-  //     pass: 'me@web4test'
-  //   }
-  // });
-  
-  // var mailOptions = {
-  //   from: 'tmwebdevtest@gmail.com',
-  //   // to: 'monsurahmedshafiq@gmail.com',
-  //   to: email,
-  //   subject: 'Sending Email using Node.js',
-  //   text: 'That was easy! ',
-  //   html: output
-  //   // html: "Hello,<br> Please Click on the link to verify your email.<br><a href="+rand+">Click here to verify</a>"
-  // };
-  
-  // transporter.sendMail(mailOptions, function(error, info){
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     console.log('Email sent: ' + info.response);
-  //   }
-  // });
-  // //eamil
-  //     bcrypt.genSalt(10, function(err, salt) {
-  //         bcrypt.hash(emailvefiry.password, salt, function(err, hash) {
-  //             emailvefiry.password = hash;
-  //             emailvefiry.save(
-     
-  
-  //       res.json(emailvefiry)
-  //       );
-              
-  //         });
-  //     });
   
 
     }
@@ -513,19 +469,11 @@ router.post('/singup', [
         });
 ///login
 router.get('/login', function (req, res) {
-    //   var title="";
-    //   var email="";
-    //   var message="";
-    
-    // res.send(' admin add')
-    res.render('admin/register/login',{
-    //   title:title,
-    //   email:email,
-    //   message:message
-    }) 
+
+    res.render('admin/register/login') 
     });
 
-
+///login Route
 
     router.post('/login', [
         //   check('title').not().isEmpty(),
@@ -541,22 +489,33 @@ router.get('/login', function (req, res) {
             var password=req.body.password;
             var session=req.session;
             
-            User.findOne({ email: req.body.email }, function(err, user) {
+            User.findOne({ email: email }, function(err, user) {
 
 
-                bcrypt.compare(password, user.password, function(err, res) {
+                bcrypt.compare(password, user.password, function( err,data) {
                   session.email = req.body.email;
                   // session.status = req.body.status;
                   req.session.status = user.status
+                  req.session.email = user.email
+                  req.session.userid = user._id
                     if (err) {
                         throw err
-                    } else if(res) {
-                          if (res,req.session.status === '1') {
+                    } else if(data) {
+                          if (session.status === '1') {
                             
-                          console.log('Admin')
-                          } else if (res,req.session.status === '0'){
-                            console.log('User')
+                                  // console.log('Admin')
+                              // res.send('Login As Admin');
+                              res.redirect('/admin');
+                          } else if (session.status === '0'){
+                            // console.log('User')
+                    
+                            // res.send('Login As User');
+                            res.redirect('/');
+                     
                           }
+                      // console.log(req.session);
+                      // res.redirect('/');
+
                     }else{
                      
                         console.log("Password  Not   matches!")
@@ -572,6 +531,23 @@ router.get('/login', function (req, res) {
         });
 
 
+    ////login for test
+
+   
+
+///Logout User Get Route
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
 
 
 

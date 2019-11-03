@@ -11,6 +11,7 @@ const { check, validationResult } = require('express-validator');
 var Page=require('../models/page');
 var Category=require('../models/category');
 var Product=require('../models/product');
+var User=require('../models/user');
 //for image upload
 var mkdirp = require('mkdirp');
 const fs = require('fs-extra');
@@ -19,7 +20,16 @@ const fs = require('fs-extra');
 // router.get('/', function (req, res) {
 //     res.send(' admin page')
 //   })
-router.get('/', (req, res) => res.render('admin/index'));
+router.get('/',function (req, res,next) {
+
+  var session=req.session;
+  email=session.email
+  console.log(session);
+// res.send(session);
+  res.render('admin/admin_index',{email:email})
+    } );
+
+
   
 router.get('/add', function (req, res) {
   var title="";

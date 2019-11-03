@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
+var cookieParser = require('cookie-parser')
 const { check, validationResult } = require('express-validator');
 var nodemailer = require('nodemailer');
 // app.use( express.static( "public" ) );//for image link public folder
@@ -55,6 +56,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //express file upload middleware
 app.use(fileUpload());
+//cookie parser middleware
+app.use(cookieParser())
 //body parser middleware
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -67,10 +70,11 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { secure: false }
   }))
-// app.get('/', (req, res) => res.send('Hello World!'));
-// app.get('/', (req, res) => res.render('index'));
+
+
+  //route declair heree
 var home=require('./routes/home');
 var admin=require('./routes/admin');
 var register=require('./routes/register');
